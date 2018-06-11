@@ -11,15 +11,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-
-
-    
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet"> 
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
+        
         <!-- Navbar -->
-        <nav class="navbar navbar-dark bg-primary">
+        <nav class="navbar navbar-dark bg-primary nav-custom">
             <div class="container">
                 <div class="navbar-brand">
 
@@ -28,7 +26,7 @@
 
         </nav>
         <!-- Navbar End -->
-
+        
         <!-- Content -->
         <div class="container">
             <div class="col-md-3 col-lg-3">
@@ -38,12 +36,13 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="page-header text-center">
-                                <h3></h3>
-                            </div>
+                                <div class="text-center">
+                                    <h3 id="ttl">Code Terminology Guess</h3></div>
+                                </div>
                             <div class="text-center">
-                                <button type="button" id="start" class="btn btn-success start-button">Start Game</button>
+                                <button type="button" id="start" class="btn btn-success start-button button-custom">Start Game</button>
                             </div>
-                            <div class="alert alert-success">
+                            <div class="alert alert-success alert-custom">
                                 <p id="wins">Wins: <span id="winscount"></span></p>
                             </div>
                             <div class="alert alert-warning">
@@ -72,143 +71,7 @@
 
         <!-- Content End -->
 
-    <script>
 
-            var wins = 0;
-            var remain = 15;
-            var guessedCoreect = [];
-            var guessedInCoreect = [];
-            var currentWord;
-            var words = [
-                'statement',
-                'function',
-                'variable',
-                'framework',
-                'terminal',
-                'object'
-            ];
-
-            function getWord(array, max) { //Get random word
-                this.array = array;
-                this.max = max;
-                var min = 0;
-                var random = Math.floor(Math.random() * (max - min + 1) + min);
-                return array[random];
-            }
-            
-            function resetField() { //Reset all fields at start game
-                remain = 15;
-                document.getElementById('winscount').innerHTML = wins;
-                document.getElementById('remaincount').innerHTML = remain;
-                document.getElementById('guessedcount').innerHTML = '';
-                document.getElementById('wordcount').innerHTML = '';
-                var repeat = [];
-            }
-            
-            start.onclick = function() {
-
-                resetField();
-                currentWord = getWord(words, words.length-1);
-                console.log(currentWord);
-                setWordField(currentWord);
-                
-                document.onkeypress = function(e) {
-                    var key = e.key;
-                    check(key);
-                }
-            };
-
-           function check(key) {
-               
-               if (key >= 'a' && key <= 'z') {
-                   var str = currentWord;
-
-                    for (var i = 0; i < str.length; i++) {
-                        if (str[i] === key) {
-                                showUp(key, i);
-                                isCompleted();
-                            }
-                        if (!str.includes(key)) {
-                                alreadyUsedIncorrect(key);
-                        }
-                    }
-                }     
-            } 
-
-           function setWordField(currentWord) {
-                for (var i = 0; i < currentWord.length; i++) {
-                    var newSpan = document.createElement("span");
-                    newSpan.setAttribute("id", i);
-                    newSpan.setAttribute("class", "wordspan");
-                    var dash = document.createTextNode("_" + " ");
-                    newSpan.appendChild(dash);
-                    var element = document.getElementById("wordcount");
-                    element.appendChild(newSpan);
-                }
-
-           }
-
-           function youWin() {
-               alert('Win! Congrats! My code worked!')
-           }
-
-           function youLose() {
-               
-           }
-
-           function showUp(key, index) {
-               document.getElementById(index).innerText = key.toUpperCase();
-           }
-
-           function isCompleted() {
-                var completed = document.getElementsByClassName('wordspan');
-                var completedWord = '';
-                for (var i = 0; i < completed.length; i++){
-                    completedWord = completedWord + completed[i].innerText;
-                }
-                if (completedWord.toLowerCase() === currentWord) {
-                    alert('Win');
-                }
-           }
-            
-
-           function alreadyUsedCorrect(key) {
-                if (!guessedCoreect.includes(key)) {
-                    guessedCoreect.push(key);
-                    console.log(guessedCoreect.length + " size correct");
-                    return true;
-                }
-                else return false;
-           }
-
-           function alreadyUsedIncorrect(key) {
-                if (!guessedInCoreect.includes(key)) {
-                    guessedInCoreect.push(key)
-                    console.log(guessedInCoreect.length + " size incorrect");
-                    guessesRemainingDown();
-                    for (var i = 0; i < guessedInCoreect.length; i++){
-                        document.getElementById('guessedcount').innerText = guessedInCoreect.toString().toUpperCase();
-                    }
-                }
-           }
-
-
-            function guessesRemainingDown() {
-                remain--;
-                document.getElementById('remaincount').innerHTML = remain;
-            }
-
-
-
-
-
-
-
-
-
-    </script>
-
-
-
+        <script src="javascript/game.js"></script>
 </body>
 </html>

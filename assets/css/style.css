@@ -1,3 +1,7 @@
+body {
+    background-image: url('../images/back.png');
+    background-repeat: no-repeat, repeat;
+}
 .game{
 margin-top: 20%;
 margin-left: 40%;
@@ -7,4 +11,19 @@ margin-left: 40%;
 }
 .word {
     font-size: 20px;
+}
+.nav-custom {
+    background-color: #c72650;
+}
+#ttl {
+    font-family: 'Orbitron', sans-serif;
+    width: 100%;
+}
+p {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+}
+.btn {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 16px;
 }
